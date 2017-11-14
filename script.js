@@ -21,17 +21,23 @@ document.addEventListener('DOMContentLoaded', function() {
   // change player to 1
   // count ++
 
+  // if div index+1 === winningcombos
+
   var cells = document.querySelectorAll('td');
 
   cells.forEach(function(cell) {
     cell.addEventListener('click', function(e){
 
-      if (player === 1) {
-        cell.innerHTML = 'x';
+      if (player === 1 && cell.className === 'cell empty') {
+        cell.innerHTML = 'X';
         player = 2;
-      } else if (player === 2) {
-        cell.innerHTML = 'o';
+        ++count;
+        cell.className = "cell full";
+      } else if (player === 2 && cell.className === 'cell empty') {
+        cell.innerHTML = 'O';
         player = 1;
+        ++count;
+        cell.className = "cell full";
       }
 
 
