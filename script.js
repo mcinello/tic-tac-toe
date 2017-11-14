@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
   ]
 
   // when player 1 clicks, add x to td
+  // can't click in that area anymore
   // change player to 2
   // count ++
 
@@ -23,12 +24,19 @@ document.addEventListener('DOMContentLoaded', function() {
   var cells = document.querySelectorAll('td');
 
   cells.forEach(function(cell) {
+    cell.addEventListener('click', function(e){
+
+      if (player === 1) {
+        cell.innerHTML = 'x';
+        player = 2;
+      } else if (player === 2) {
+        cell.innerHTML = 'o';
+        player = 1;
+      }
 
 
 
-
-
-
+    });
   });
-  
-}
+
+});
