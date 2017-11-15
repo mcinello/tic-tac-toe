@@ -11,13 +11,10 @@ document.addEventListener('DOMContentLoaded', function() {
     [3, 6, 9],
     [3, 5, 7]
   ]
-
   var moves = ["", "", "", "", "", "", "", "", ""]
-
   var cells = document.querySelectorAll('td');
 
   // CHOOSING A CELL, SWAPPING BETWEEN PLAYERS
-
   cells.forEach(function(cell) {
     cell.addEventListener('click', function(e){
       if (player === 1 && cell.className === 'cell empty') {
@@ -40,8 +37,8 @@ document.addEventListener('DOMContentLoaded', function() {
   var body = document.querySelector('body');
   var h2 = document.createElement('h2');
 
+  // CHECKING IF X OR O IS WINNER, OR A DRAW
   function checkIfWinner() {
-    // checking if X or O is winner
     var xMoves = [];
     var oMoves = [];
     moves.forEach(function(move, idx) {
@@ -74,6 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
     })
   }
 
+  // RESET GAME
   var button = document.querySelector('button')
   button.addEventListener('click', function() {
     count = 0, player = 1
