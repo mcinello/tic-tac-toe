@@ -1,8 +1,27 @@
+html, body {
+    height: 100%;
+}
+
+html {
+    display: table;
+    margin: auto;
+}
+
 body {
-  margin-left: 20%
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+table {
+    background-color: lightcyan;
+    padding: 50px;
+    margin-top: 20px;
+    border-radius: 2rem;
 }
 
 td {
+  background-color: white;
   display: grid
   grid-template-columns: repeat(3,1fr);
   font-family: Baskerville, serif;
@@ -12,4 +31,5 @@ td {
   width: 300px;
   height: 300px;
   cursor: pointer;
+  border-radius: 2rem;
 }
