@@ -37,6 +37,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
+  var body = document.querySelector('body');
+  var h2 = document.createElement('h2');
+
   function checkIfWinner() {
     // checking if X or O is winner
     var xMoves = [];
@@ -61,11 +64,25 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       })
       if (xWinCount >= 3) {
-        console.log("X WINS");
+        h2.innerText = "Player X wins!"
       } else if (oWinCount >= 3) {
-        console.log("O WINS");
+        h2.innerText = "Player O wins!"
+      } else if (count === 9 && xWinCount < 3 && oWinCount < 3) {
+        h2.innerText = "Draw!"
       }
+      body.append(h2);
     })
   }
+
+  var button = document.querySelector('button')
+  button.addEventListener('click', function() {
+    count = 0, player = 1
+    moves = ["", "", "", "", "", "", "", "", ""]
+    h2.innerText = "";
+    cells.forEach(function(cell) {
+      cell.className = "cell empty";
+      cell.innerHTML = "";
+    });
+  });
 
 });
