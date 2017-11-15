@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-  var count = 0, player = 1
+  var count = 0, player = 1, gameFinished = false;
   var winningMoves = [
     [1, 2, 3],
     [4, 5, 6],
@@ -17,20 +17,21 @@ document.addEventListener('DOMContentLoaded', function() {
   // CHOOSING A CELL, SWAPPING BETWEEN PLAYERS
   cells.forEach(function(cell) {
     cell.addEventListener('click', function(e){
-      if (player === 1 && cell.className === 'cell empty') {
-        cell.innerHTML = 'X';
-        player = 2;
-        moves[Number(e.target.id) - 1] = "X";
+      if (!gameFinished && cell.className === 'cell empty') {
+        if (player === 1) {
+          cell.innerHTML = 'X';
+          player = 2;
+          moves[Number(e.target.id) - 1] = "X";
+        }
+        else if (player === 2) {
+          cell.innerHTML = 'O';
+          player = 1;
+          moves[Number(e.target.id) - 1] = "O";
+        }
+        cell.className = "cell full";
+        ++count;
+        checkIfWinner();
       }
-      else if (player === 2 && cell.className === 'cell empty') {
-        cell.innerHTML = 'O';
-        player = 1;
-        moves[Number(e.target.id) - 1] = "O";
-      }
-      cell.className = "cell full";
-      ++count;
-      console.log(moves);
-      checkIfWinner();
     });
   });
 
@@ -56,25 +57,33 @@ document.addEventListener('DOMContentLoaded', function() {
       winSet.forEach(function(cell) {
         if (xMoves.includes(cell)) {
           ++xWinCount;
-        } else if (oMoves.includes(cell)) {
+        }
+        else if (oMoves.includes(cell)) {
           ++oWinCount;
         }
       })
       if (xWinCount >= 3) {
-        h2.innerText = "Player X wins!"
-      } else if (oWinCount >= 3) {
-        h2.innerText = "Player O wins!"
-      } else if (count === 9 && xWinCount < 3 && oWinCount < 3) {
-        h2.innerText = "Draw!"
+        h2.innerText = "Player X wins!";
+        body.append(h2);
+        gameFinished = true;
       }
+      else if (oWinCount >= 3) {
+        h2.innerText = "Player O wins!";
+        body.append(h2);
+        gameFinished = true;
+      }
+    });
+    if (!gameFinished && count === 9) {
+      h2.innerText = "Draw!";
       body.append(h2);
-    })
+      gameFinished = true;
+    }
   }
 
   // RESET GAME
   var button = document.querySelector('button')
   button.addEventListener('click', function() {
-    count = 0, player = 1
+    count = 0, player = 1, gameFinished = false;
     moves = ["", "", "", "", "", "", "", "", ""]
     h2.innerText = "";
     cells.forEach(function(cell) {
